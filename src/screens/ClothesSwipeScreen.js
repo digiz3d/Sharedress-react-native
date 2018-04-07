@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import { Button, ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
 
-import ClothCardComponent from "./ClothCardComponent";
-import SwipeUpComponent from "./SwipeUpComponent";
-import TopMenuComponent from "./TopMenuComponent";
-import BottomMenuComponent from "./BottomMenuComponent";
+import ClothCardComponent from "../components/ClothCardComponent";
+import SwipeUpComponent from "../components/SwipeUpComponent";
+import TopMenuComponent from "../components/TopMenuComponent";
+import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
 
-export default class ClothesSwipePage extends Component {
+export default class ClothesSwipeScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-                nextItemsLoaded: false,
-                set: [],
-                finished: false
-                };
+            nextItemsLoaded: false,
+            set: [],
+            finished: false
+        };
     }
 
     restartApi = () => {
         api.resetQueue();
-        this.setState({finished: false});
+        this.setState({ finished: false });
         this.swipedUp();
     }
 
@@ -29,15 +29,15 @@ export default class ClothesSwipePage extends Component {
         });
 
         api.getNextSet().then((val) => {
-            this.setState({set: val, nextItemsLoaded: true, finished: false})
+            this.setState({ set: val, nextItemsLoaded: true, finished: false })
         }).catch((reason) => {
-            this.setState({finished:true});
+            this.setState({ finished: true });
         });
     };
 
     componentDidMount() {
         api.getNextSet().then((val) => {
-            this.setState({set: val, nextItemsLoaded: true})
+            this.setState({ set: val, nextItemsLoaded: true })
         }).catch((reason) => {
             alert(reason);
         });
@@ -67,39 +67,39 @@ export default class ClothesSwipePage extends Component {
         if (this.state.finished) {
             return (
                 <View style={styles.frame}>
-                <View style={styles.top}>
-                    <TopMenuComponent />
+                    <View style={styles.top}>
+                        <TopMenuComponent />
+                    </View>
+                    <View style={styles.finished}>
+                        <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
+                        <Button
+                            title="Recommencer"
+                            onPress={this.restartApi}
+                        />
+                    </View>
+                    <View style={styles.bottom}>
+                        <BottomMenuComponent />
+                    </View>
                 </View>
-                <View style={styles.finished}>
-                    <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
-                    <Button
-                        title="Recommencer"
-                        onPress={this.restartApi}
-                    />
-                </View>
-                <View style={styles.bottom}>
-                    <BottomMenuComponent />
-                </View>
-            </View>
             );
         }
 
         if (!this.state.nextItemsLoaded) {
             return (
                 <View style={styles.frame}>
-                <View style={styles.top}>
-                    <TopMenuComponent />
+                    <View style={styles.top}>
+                        <TopMenuComponent />
+                    </View>
+                    <View style={styles.loading}>
+                        <ActivityIndicator size="large" color="#000" />
+                    </View>
+                    <View style={styles.bottom}>
+                        <BottomMenuComponent />
+                    </View>
                 </View>
-                <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#000" />
-                </View>
-                <View style={styles.bottom}>
-                    <BottomMenuComponent />
-                </View>
-            </View>
             );
         }
-        
+
         return (
             <View style={styles.frame}>
                 <View style={styles.top}>

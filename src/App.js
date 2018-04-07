@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Platform, Text, View } from "react-native";
-import ClothesSwipePage from "./components/ClothesSwipePage";
-import LoginPage from "./components/LoginPage";
+import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
+import LoginScreen from "./screens/LoginScreen";
 import api from "./Api";
 
 export default class App extends Component {
@@ -17,12 +17,12 @@ export default class App extends Component {
     render() {
         if (!this.state.loggedIn) {
             return (
-                <LoginPage onLogin={this.onLogin} />
+                <LoginScreen onLogin={this.onLogin} />
             );
         }
 
         return (
-            <ClothesSwipePage />
+            <ClothesSwipeScreen />
         );
     }
 }
