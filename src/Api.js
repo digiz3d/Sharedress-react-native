@@ -33,9 +33,13 @@ var clothes = [
 ];
 
 class Api {
+    static nextSetDelay = 500;
+    static loginDelay = 1500;
+
     constructor() {
         this.username = "";
-        this.nextSetDelay = 500;
+        this.sex = null;
+        this.age = 0;
         this.inc = 0;
     }
 
@@ -62,7 +66,7 @@ class Api {
                 else{
                     reject();
                 }
-            }, this.nextSetDelay);
+            }, Api.nextSetDelay);
         });
     }
 
@@ -71,8 +75,32 @@ class Api {
             setTimeout(function() {
                 if (user == "test" && password == "test") resolve(true);
                 else reject(false);
-            }, 1500);
+            }, Api.loginDelay);
         });
+    }
+
+    setAge(age) {
+        if (age < 1 || age > 120) {
+            return false;
+        }
+        this.age = age;
+        return true;
+    }
+
+    setSex(sex) {
+        if (!sex) {
+            return false;
+        }
+        this.sex = sex;
+        return true;
+    }
+
+    isAgeOk() {
+        return this.age != 0;
+    }
+
+    isSexOk() {
+        return this.sex != null;
     }
 
     resetQueue() {
