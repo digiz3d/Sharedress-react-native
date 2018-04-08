@@ -11,12 +11,11 @@ export default class BottomMenuComponent extends Component {
                 <View style={styles.subMenu}>
                     <Image style={styles.icon} source={require("../../assets/icons/person.png")} />
                 </View>
-                <View style={styles.subMenu}>
-                    <Image style={styles.icon} source={require("../../assets/icons/graph.png")} />
-                </View>
+                {/* we will enable that later
                 <View style={styles.subMenu}>
                     <Image style={styles.icon} source={require("../../assets/icons/cog.png")} />
                 </View>
+                */}
             </View>
         );
     }
