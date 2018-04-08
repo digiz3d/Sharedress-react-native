@@ -6,12 +6,12 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "run-android": "react-native run-android",
-	"debug": "react-native run-android --variant=debug",
-	"release": "react-native run-android --variant=release"
+    "debug": "react-native run-android --variant=debug",
+    "release": "react-native run-android --variant=release"
   },
   "dependencies": {
-    "react": "16.3.0-alpha.1",
-    "react-native": "0.54.0"
+    "react": "^16.3.1",
+    "react-native": "^0.55.1"
   },
   "devDependencies": {
     "babel-jest": "22.4.1",
