@@ -28,7 +28,7 @@ export default class HomeScreen extends Component {
     renderAgePicker() {
         let pickers = [];
         for (let i = MIN_AGE; i < MAX_AGE; i++) {
-            pickers.push(<Picker.Item label={i.toString()} value={i.toString()} />);
+            pickers.push(<Picker.Item key={"Pickeritem-"+i.toString()} label={i.toString()} value={i.toString()} />);
         }
 
         return (
