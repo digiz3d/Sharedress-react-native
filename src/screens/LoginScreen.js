@@ -18,12 +18,11 @@ export default class LoginScreen extends Component {
 
         api.login(this.state.login, this.state.password).
             then(() => {
-				this.setState({ loading: false });
-                this.props.onLogin(true);
+                // TODO: implement a real token creation so we can store it and stay logged in
+				this.props.navigation.navigate("App");
             })
             .catch(() => {
 				this.setState({ loading: false });
-                this.props.onLogin(false);
             });
     }
 

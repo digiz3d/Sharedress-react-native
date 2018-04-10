@@ -62,8 +62,8 @@ export default class HomeScreen extends Component {
             <View style={styles.frame}>
                 <View style={styles.panel}>
                     <Text style={styles.title}>Prototype</Text>
-                    {this.renderSexPicker()}
                     {this.renderAgePicker()}
+                    {this.renderSexPicker()}
                     <Button
                         onPress={this.submit}
                         title="Submit"

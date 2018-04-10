@@ -1,42 +1,55 @@
 import React, { Component } from "react";
 import { Platform, Text, View } from "react-native";
-import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
-import HomeScreen from "./screens/HomeScreen";
+import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation';
+
+import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import LoginScreen from "./screens/LoginScreen";
+
+//import HomeScreen from "./screens/HomeScreen";
+
+import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
+import CouponsScreen from "./screens/CouponsScreen";
+
 import api from "./Api";
 
-export default class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            loggedIn: false,
-            selectedAgeNSex: false
-        };
-    }
 
-    onLogin = (val) => {
-        this.setState({loggedIn: val});
-    }
-
-    onSelectAgeAndSex = (val) => {
-        this.setState({selectedAgeNSex: val});
-    }
-
-    render() {
-        if (!this.state.loggedIn) {
-            return (
-                <LoginScreen onLogin={this.onLogin} />
-            );
+// TODO: add a settings screen
+const AppTab = TabNavigator(
+    {
+        Swipe: ClothesSwipeScreen,
+        Coupons: CouponsScreen,
+    },
+    {
+        swipeEnabled: false,
+        tabBarPosition: 'bottom',
+        lazy: false,
+        tabBarOptions: {
+            renderIndicator: () => null, // that disable the tab indicator
+            upperCaseLabel: false,
+            style: {
+                backgroundColor: "white",
+            },
+            activeTintColor: "black",
+            inactiveTintColor: "#444",
         }
-
-        if (!this.state.selectedAgeNSex) {
-            return (
-                <HomeScreen onSelectAgeAndSex={this.onSelectAgeAndSex} />
-            );
-        }
-
-        return (
-            <ClothesSwipeScreen />
-        );
     }
-}
+);
+// TODO: add a sign-up screen
+const AuthTab = StackNavigator(
+    {
+        SignIn: LoginScreen,
+    },
+    {
+        headerMode: 'none', // we don't want a blank header
+    });
+
+export default SwitchNavigator(
+    {
+        AuthLoading: AuthLoadingScreen,
+        App: AppTab,
+        Auth: AuthTab,
+    },
+    {
+        initialRouteName: 'AuthLoading',
+    }
+);

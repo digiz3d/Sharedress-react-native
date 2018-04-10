@@ -17,6 +17,14 @@ export default class ClothesSwipeScreen extends Component {
         };
     }
 
+    componentDidMount() {
+        api.getNextSet().then((val) => {
+            this.setState({ set: val, nextItemsLoaded: true })
+        }).catch((reason) => {
+            alert(reason);
+        });
+    }
+
     restartApi = () => {
         api.resetQueue();
         this.setState({ finished: false });
@@ -35,14 +43,6 @@ export default class ClothesSwipeScreen extends Component {
         });
     };
 
-    componentDidMount() {
-        api.getNextSet().then((val) => {
-            this.setState({ set: val, nextItemsLoaded: true })
-        }).catch((reason) => {
-            alert(reason);
-        });
-    }
-
     renderSwipeUpComponents() {
         return (
             <View style={styles.main}>
@@ -60,7 +60,6 @@ export default class ClothesSwipeScreen extends Component {
                 />
             </View>
         );
-
     }
 
     render() {
@@ -77,9 +76,6 @@ export default class ClothesSwipeScreen extends Component {
                             onPress={this.restartApi}
                         />
                     </View>
-                    <View style={styles.bottom}>
-                        <BottomMenuComponent />
-                    </View>
                 </View>
             );
         }
@@ -93,9 +89,6 @@ export default class ClothesSwipeScreen extends Component {
                     <View style={styles.loading}>
                         <ActivityIndicator size="large" color="#000" />
                     </View>
-                    <View style={styles.bottom}>
-                        <BottomMenuComponent />
-                    </View>
                 </View>
             );
         }
@@ -106,9 +99,6 @@ export default class ClothesSwipeScreen extends Component {
                     <TopMenuComponent />
                 </View>
                 {this.renderSwipeUpComponents()}
-                <View style={styles.bottom}>
-                    <BottomMenuComponent />
-                </View>
             </View>
         );
     }
