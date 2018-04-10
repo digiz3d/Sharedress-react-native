@@ -8,6 +8,27 @@ class Cloth {
         this.image = image;
     }
 }
+class Coupon {
+    constructor(id, name, value, logo) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.logo = logo;
+    }
+}
+
+var coupons = [
+    new Coupon(1, "Prada", "15%", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Prada-Logo.svg/268px-Prada-Logo.svg.png"),
+    new Coupon(2, "Giorgio Armani", "10%", "https://seeklogo.com/images/G/Giorgio_Armani-logo-C67193A325-seeklogo.com.png"),
+    new Coupon(3, "Desigual", "15%", "http://www.stickpng.com/assets/images/5a1ac8c1f65d84088faf1375.png"),
+    new Coupon(4, "Yves Delorme","30€", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/052014/yves_delorme_logo_new_0.png"),
+    new Coupon(5, "Gucci","20%", "http://diylogodesigns.com/blog/wp-content/uploads/2017/07/gucci-vector-logo-768x768.png"),
+    new Coupon(6, "Prada", "15%", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Prada-Logo.svg/268px-Prada-Logo.svg.png"),
+    new Coupon(7, "Giorgio Armani", "10%", "https://seeklogo.com/images/G/Giorgio_Armani-logo-C67193A325-seeklogo.com.png"),
+    new Coupon(8, "Desigual", "15%", "http://www.stickpng.com/assets/images/5a1ac8c1f65d84088faf1375.png"),
+    new Coupon(9, "Yves Delorme","30€", "https://botw-pd.s3.amazonaws.com/styles/logo-thumbnail/s3/052014/yves_delorme_logo_new_0.png"),
+    new Coupon(10, "Gucci","20%", "http://diylogodesigns.com/blog/wp-content/uploads/2017/07/gucci-vector-logo-768x768.png"),
+];
 
 var clothes = [
     new Cloth(1,"robe rouge 1", "https://media.missguided.com/s/missguided/DE908678_set/1/robe-courte-rouge--volant-col-montant-et-paules-dnudes.jpg"),
@@ -34,13 +55,22 @@ var clothes = [
 
 class Api {
     static nextSetDelay = 500;
-    static loginDelay = 1500;
+    static loginDelay = 500;
+    static couponsDelay = 500;
 
     constructor() {
         this.username = "";
         this.sex = null;
         this.age = 0;
         this.inc = 0;
+    }
+
+    getMyCoupons() {
+        return new Promise((resolve, reject) => {
+            setTimeout(function() {
+                resolve(coupons);
+            }, Api.couponsDelay);
+        });
     }
 
     getNextSet() {
