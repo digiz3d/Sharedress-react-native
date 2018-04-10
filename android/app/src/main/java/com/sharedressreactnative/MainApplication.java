@@ -1,4 +1,4 @@
-package com.prototypeclothesswiper;
+package com.sharedressreactnative;
 
 import android.app.Application;
 
