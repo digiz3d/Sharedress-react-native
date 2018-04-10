@@ -18,12 +18,12 @@ export default class LoginScreen extends Component {
 
         api.login(this.state.login, this.state.password).
             then(() => {
+				this.setState({ loading: false });
                 this.props.onLogin(true);
-                this.setState({ loading: false });
             })
             .catch(() => {
+				this.setState({ loading: false });
                 this.props.onLogin(false);
-                this.setState({ loading: false });
             });
     }
 
