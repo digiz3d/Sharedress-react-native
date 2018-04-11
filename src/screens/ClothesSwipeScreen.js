@@ -4,7 +4,6 @@ import { Button, ActivityIndicator, Platform, StyleSheet, Text, View } from "rea
 import ClothCardComponent from "../components/ClothCardComponent";
 import SwipeUpComponent from "../components/SwipeUpComponent";
 import TopMenuComponent from "../components/TopMenuComponent";
-import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
 
 export default class ClothesSwipeScreen extends Component {
@@ -135,11 +134,5 @@ const styles = StyleSheet.create({
     finishedText: {
         textAlign: "center",
         marginBottom: 20,
-    },
-    bottom: {
-        //backgroundColor: "yellow",
-        backgroundColor: "#fff",
-        zIndex: 2,
-        elevation: 10,
     },
 });

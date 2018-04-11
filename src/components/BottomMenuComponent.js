@@ -1,45 +1,37 @@
 import React, { Component } from "react";
-import { Image, Platform, StyleSheet, Text, View } from "react-native";
+import { Image, TouchableHighlight, StyleSheet, Text, View } from "react-native";
 
 export default class BottomMenuComponent extends Component {
+    constructor(props) {
+        super(props);
+    }
+    onPressAction = () => {
+        this.props.onPress();
+    }
+
     render() {
         return (
-            <View style={styles.menu}>
-                <View style={styles.subMenu}>
-                    <Image style={styles.icon} source={require("../../assets/icons/home.png")} />
+            <TouchableHighlight
+                onPress={this.onPressAction}>
+                <View style={styles.menu}>
+                    <Text>{this.props.question} </Text>
+                    <Text style={styles.link}>{this.props.answer}</Text>
                 </View>
-                <View style={styles.subMenu}>
-                    <Image style={styles.icon} source={require("../../assets/icons/person.png")} />
-                </View>
-                {/* we will enable that later
-                <View style={styles.subMenu}>
-                    <Image style={styles.icon} source={require("../../assets/icons/cog.png")} />
-                </View>
-                */}
-            </View>
+            </TouchableHighlight>
         );
     }
 }
 
 const styles = StyleSheet.create({
     menu: {
-        //backgroundColor: "red",
+        backgroundColor: "white",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        height: 50,
     },
-    subMenu: {
-        //backgroundColor: "orange",
-        flex:1,
-        alignItems: "center",
-        //borderRadius: 4,
-        //borderWidth: 2,
-        //borderColor: "green",
-    },
-    icon: {
-        height: 24,
-        width: 24,
-        margin: 10,
+    link: {
+        fontWeight: 'bold',
     },
 });
 

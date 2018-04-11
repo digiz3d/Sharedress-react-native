@@ -4,6 +4,7 @@ import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation'
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import LoginScreen from "./screens/LoginScreen";
+import SignupScreen from "./screens/SignupScreen";
 
 //import HomeScreen from "./screens/HomeScreen";
 
@@ -11,7 +12,6 @@ import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
 import CouponsScreen from "./screens/CouponsScreen";
 
 import api from "./Api";
-
 
 // TODO: add a settings screen
 const AppTab = TabNavigator(
@@ -37,7 +37,8 @@ const AppTab = TabNavigator(
 // TODO: add a sign-up screen
 const AuthTab = StackNavigator(
     {
-        SignIn: LoginScreen,
+        Login: LoginScreen,
+        Signup: SignupScreen,
     },
     {
         headerMode: 'none', // we don't want a blank header

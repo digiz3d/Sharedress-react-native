@@ -1,23 +1,22 @@
 import React, { Component } from "react";
 import { Button, TextInput, TouchableHighlight, ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
 import BottomMenuComponent from "../components/BottomMenuComponent";
-
 import api from "../Api";
 
-export default class LoginScreen extends Component {
+export default class SignupScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { login: "", password: "", loading: false };
+        this.state = { loading : false };
     }
 
-    gotoSignup = () => {
-        this.props.navigation.navigate("Signup");
+    goBack = () => {
+        this.props.navigation.goBack();
     }
 
-    login = () => {
+    signup = () => {
         this.setState({ loading: true });
-        console.warn("login = " + this.state.login + " , password = " + this.state.password );
-        api.login(this.state.login, this.state.password).
+
+        api.login("test", "test").
             then(() => {
                 // TODO: implement a real token creation so we can store it and stay logged in
                 this.props.navigation.navigate("App");
@@ -26,12 +25,12 @@ export default class LoginScreen extends Component {
                 this.setState({ loading: false });
             });
     }
-    
+
     render() {
         return (
             <View style={styles.fullPage}>
                 <View style={styles.registerBackground}>
-                    <Text style={styles.title}>Prototype login</Text>
+                    <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
                             keyboardType="email-address"
@@ -42,22 +41,29 @@ export default class LoginScreen extends Component {
                         />
                         <TextInput
                             placeholder="Password"
-                            onChangeText={(txt) => { this.setState({ password: txt }) }}
+                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            style={styles.textInput}
+                            underlineColorAndroid="transparent"
+                            secureTextEntry
+                        />
+                        <TextInput
+                            placeholder="Password confirmation"
+                            onChangeText={(txt) => { this.setState({ login: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                             secureTextEntry
                         />
                         <Button
-                            onPress={this.login}
-                            title={this.state.loading ? "Loggin you in..." : "Log in"}
+                            onPress={this.signup}
+                            title={this.state.loading ? "Signing you up..." : "Sign up"}
                         />
                     </View>
                 </View>
                 <View style={styles.bottomMenu}>
                     <BottomMenuComponent
-                        onPress={this.gotoSignup}
-                        question="Don't have an account ?"
-                        answer="Sign up."
+                        onPress={this.goBack}
+                        question="Already have an account ?"
+                        answer="Log in."
                     />
                 </View>
             </View>
