@@ -16,7 +16,7 @@ export default class LoginScreen extends Component {
 
     login = () => {
         this.setState({ loading: true });
-        console.warn("login = " + this.state.login + " , password = " + this.state.password );
+        console.warn("login = " + this.state.login + " , password = " + this.state.password);
         api.login(this.state.login, this.state.password).
             then(() => {
                 // TODO: implement a real token creation so we can store it and stay logged in
@@ -26,7 +26,7 @@ export default class LoginScreen extends Component {
                 this.setState({ loading: false });
             });
     }
-    
+
     render() {
         return (
             <View style={styles.fullPage}>
@@ -47,10 +47,17 @@ export default class LoginScreen extends Component {
                             underlineColorAndroid="transparent"
                             secureTextEntry
                         />
-                        <Button
-                            onPress={this.login}
-                            title={this.state.loading ? "Loggin you in..." : "Log in"}
-                        />
+                        <View style={styles.loginButton}>
+                            <Button
+                                onPress={this.login}
+                                title={this.state.loading ? "Loggin you in..." : "Log in"}
+                            />
+                        </View>
+                        <View style={styles.fbSeparator}>
+                            <View style={styles.fbSeparatorLine} />
+                            <Text style={styles.fbSeparatorOR}>or</Text>
+                            <View style={styles.fbSeparatorLine} />
+                        </View>
                     </View>
                 </View>
                 <View style={styles.bottomMenu}>
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 10,
     },
-    title : {
+    title: {
         fontSize: 30,
     },
     bottomMenu: {
@@ -85,18 +92,41 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: '#ccc',
     },
-    form : {
+    form: {
         width: "100%",
     },
     textInput: {
         backgroundColor: "white",
         width: "100%",
         borderWidth: 0,
-        borderRadius: 10,
+        borderRadius: 5,
         borderColor: "silver",
         borderWidth: 1,
         marginBottom: 10,
         paddingHorizontal: 10,
         height: 40,
+    },
+    loginButton: {
+        height: 40,
+        marginBottom: 10,
+    },
+    fbSeparator: {
+        //backgroundColor: "red",
+        flexDirection: "row",
+        justifyContent:"center",
+        alignItems: "center",
+        marginBottom: 10,
+    },
+    fbSeparatorOR: {
+        //backgroundColor: "blue",
+        paddingHorizontal: 10,
+        color: "#999",
+    },
+    fbSeparatorLine: {
+        //backgroundColor: "transparent",
+        borderBottomWidth: 0.5,
+        borderColor: "#999",
+        flexGrow: 1,
+        height: 5,
     },
 });
