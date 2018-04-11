@@ -16,7 +16,7 @@ export default class LoginScreen extends Component {
 
     login = () => {
         this.setState({ loading: true });
-        console.warn("login = " + this.state.login + " , password = " + this.state.password);
+
         api.login(this.state.login, this.state.password).
             then(() => {
                 // TODO: implement a real token creation so we can store it and stay logged in
