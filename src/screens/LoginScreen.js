@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Button, TextInput, TouchableHighlight, ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { Button, TextInput, TouchableHighlight, ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
 import api from "../Api";
@@ -29,7 +30,8 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <View style={styles.fullPage}>
+            <SafeAreaView style={styles.fullPage}>
+                <CustomStatusBar />
                 <View style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
                     <View style={styles.form}>
@@ -67,7 +69,7 @@ export default class LoginScreen extends Component {
                         answer="Sign up."
                     />
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }

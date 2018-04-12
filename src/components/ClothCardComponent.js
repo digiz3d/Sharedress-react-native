@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Image, Platform, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 
 export default class ClothCardComponent extends Component {
     render() {

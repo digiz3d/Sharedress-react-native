@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Button, ActivityIndicator, Platform, StyleSheet, Text, View } from "react-native";
-
+import React, { Component } from 'react';
+import { Button, ActivityIndicator, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 import ClothCardComponent from "../components/ClothCardComponent";
 import SwipeUpComponent from "../components/SwipeUpComponent";
 import TopMenuComponent from "../components/TopMenuComponent";
@@ -64,7 +64,8 @@ export default class ClothesSwipeScreen extends Component {
     render() {
         if (this.state.finished) {
             return (
-                <View style={styles.frame}>
+                <SafeAreaView style={styles.frame}>
+                    <CustomStatusBar />
                     <View style={styles.top}>
                         <TopMenuComponent />
                     </View>
@@ -75,30 +76,32 @@ export default class ClothesSwipeScreen extends Component {
                             onPress={this.restartApi}
                         />
                     </View>
-                </View>
+                </SafeAreaView>
             );
         }
 
         if (!this.state.nextItemsLoaded) {
             return (
-                <View style={styles.frame}>
+                <SafeAreaView style={styles.frame}>
+                    <CustomStatusBar />
                     <View style={styles.top}>
                         <TopMenuComponent />
                     </View>
                     <View style={styles.loading}>
                         <ActivityIndicator size="large" color="#000" />
                     </View>
-                </View>
+                </SafeAreaView>
             );
         }
 
         return (
-            <View style={styles.frame}>
+            <SafeAreaView style={styles.frame}>
+                <CustomStatusBar />
                 <View style={styles.top}>
                     <TopMenuComponent />
                 </View>
                 {this.renderSwipeUpComponents()}
-            </View>
+            </SafeAreaView>
         );
     }
 }
