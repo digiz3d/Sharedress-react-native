@@ -92,6 +92,10 @@ const styles = StyleSheet.create({
         elevation: 10,
         borderTopWidth: 1,
         borderColor: '#ccc',
+        shadowColor: "black",
+        shadowOffset: {width: 0, height: -2},
+        shadowOpacity: 0.1,
+        shadowRadius: 1,
     },
     form : {
         width: "100%",

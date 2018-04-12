@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
         marginVertical: 5,
         flex: 1,
-        elevation: 2
+        elevation: 2,
+        shadowColor: "black",
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.2,
+        shadowRadius: 1,
     },
     image: {
         borderRadius: 5,
