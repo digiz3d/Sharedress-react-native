@@ -60,7 +60,7 @@ export default class CouponsScreen extends Component {
 
 const styles = StyleSheet.create({
     frame: {
-        backgroundColor: "#eee",
+        backgroundColor: "#efefef",
         flex: 1,
     },
     top: {
