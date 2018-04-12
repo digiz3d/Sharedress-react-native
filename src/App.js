@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Platform, Text, View } from "react-native";
+import React, { Component } from 'react';
+import { Platform, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation';
 
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
     PanResponder,
     Animated,
@@ -6,7 +6,7 @@ import {
     StyleSheet,
     Text,
     View
-} from "react-native";
+} from 'react-native';
 import ClothCardComponent from "./ClothCardComponent";
 import clamp from "../helpers/clamp";
 

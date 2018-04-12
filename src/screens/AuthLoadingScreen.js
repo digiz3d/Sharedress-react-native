@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
+import React, { Component } from 'react';
+import { ActivityIndicator, SafeAreaView, StyleSheet, View } from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 
 export default class AuthLoadingScreen extends Component {
     componentDidMount() {
@@ -9,10 +10,10 @@ export default class AuthLoadingScreen extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container}>
+                <CustomStatusBar />
                 <ActivityIndicator />
-                <StatusBar barStyle="default" />
-            </View>
+            </SafeAreaView>
         );
     }
 }

@@ -1,5 +1,6 @@
-import React, { Component } from "react";
-import { Button, Picker, Text, StyleSheet, View } from "react-native";
+import React, { Component } from 'react';
+import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
+import CustomStatusBar from '../components/CustomStatusBar';
 import api from "../Api";
 
 const MIN_AGE = 13;
@@ -59,7 +60,8 @@ export default class HomeScreen extends Component {
     
     render() {
         return (
-            <View style={styles.frame}>
+            <SafeAreaView style={styles.frame}>
+                <CustomStatusBar />
                 <View style={styles.panel}>
                     <Text style={styles.title}>Prototype</Text>
                     {this.renderAgePicker()}
@@ -69,7 +71,7 @@ export default class HomeScreen extends Component {
                         title="Submit"
                     />
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 }
