@@ -6,7 +6,7 @@ const CustomStatusBar = () => {
             <StatusBar
                 translucent
                 backgroundColor="transparent"
-                barStyle="dark-content"
+                barStyle="light-content"
             />
     );
 };
