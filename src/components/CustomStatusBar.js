@@ -1,8 +1,14 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar, View} from 'react-native';
 
 const CustomStatusBar = () => {
-    return <StatusBar translucent />;
+    return  (
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
+    );
 };
 
 export default CustomStatusBar;
