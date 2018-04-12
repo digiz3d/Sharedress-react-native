@@ -64,17 +64,19 @@ export default class ClothesSwipeScreen extends Component {
     render() {
         if (this.state.finished) {
             return (
-                <SafeAreaView style={styles.frame}>
-                    <CustomStatusBar />
-                    <View style={styles.top}>
-                        <TopMenuComponent />
-                    </View>
-                    <View style={styles.finished}>
-                        <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
-                        <Button
-                            title="Recommencer"
-                            onPress={this.restartApi}
-                        />
+                <SafeAreaView style={styles.whiteframe}>
+                    <View style={styles.frame}>
+                        <CustomStatusBar />
+                        <View style={styles.top}>
+                            <TopMenuComponent />
+                        </View>
+                        <View style={styles.finished}>
+                            <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
+                            <Button
+                                title="Recommencer"
+                                onPress={this.restartApi}
+                            />
+                        </View>
                     </View>
                 </SafeAreaView>
             );
@@ -82,25 +84,29 @@ export default class ClothesSwipeScreen extends Component {
 
         if (!this.state.nextItemsLoaded) {
             return (
-                <SafeAreaView style={styles.frame}>
-                    <CustomStatusBar />
-                    <View style={styles.top}>
-                        <TopMenuComponent />
-                    </View>
-                    <View style={styles.loading}>
-                        <ActivityIndicator size="large" color="#000" />
+                <SafeAreaView style={styles.whiteframe}>
+                    <View style={styles.frame}>
+                        <CustomStatusBar />
+                        <View style={styles.top}>
+                            <TopMenuComponent />
+                        </View>
+                        <View style={styles.loading}>
+                            <ActivityIndicator size="large" color="#000" />
+                        </View>
                     </View>
                 </SafeAreaView>
             );
         }
 
         return (
-            <SafeAreaView style={styles.frame}>
-                <CustomStatusBar />
-                <View style={styles.top}>
-                    <TopMenuComponent />
+            <SafeAreaView style={styles.whiteframe}>
+                <View style={styles.frame}>
+                    <CustomStatusBar />
+                    <View style={styles.top}>
+                        <TopMenuComponent />
+                    </View>
+                    {this.renderSwipeUpComponents()}
                 </View>
-                {this.renderSwipeUpComponents()}
             </SafeAreaView>
         );
     }
@@ -108,6 +114,10 @@ export default class ClothesSwipeScreen extends Component {
 
 
 const styles = StyleSheet.create({
+    whiteframe: {
+        backgroundColor: "white",
+        flex: 1,
+    },
     frame: {
         backgroundColor: "#efefef",
         flex: 1,
@@ -116,7 +126,7 @@ const styles = StyleSheet.create({
         //backgroundColor: "red",
         backgroundColor: "#fff",
         shadowColor: "black",
-        shadowOffset: {width: 0, height: 2},
+        shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 1,
         zIndex: 2,
