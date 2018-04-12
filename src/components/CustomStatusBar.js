@@ -1,10 +1,10 @@
 import React from 'react';
 import { Platform, StatusBar, View} from 'react-native';
 
-const CustomStatusBar = () => {
+const CustomStatusBar = (props) => {
     return  (
             <StatusBar
-                backgroundColor="transparent"
+                backgroundColor={props.color ? props.color : "#efefef"}
                 barStyle="dark-content"
             />
     );
