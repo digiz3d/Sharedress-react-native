@@ -103,7 +103,7 @@ class Api {
     login(user, password) {
         return new Promise((resolve, reject) => {
             setTimeout(function() {
-                if (user == "test" && password == "test") resolve(true);
+                if (user.toLowerCase() == "test" && password.toLowerCase() == "test") resolve(true);
                 else reject(false);
             }, Api.loginDelay);
         });
