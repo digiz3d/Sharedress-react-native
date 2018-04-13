@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, TextInput, TouchableHighlight, ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Button, TextInput, TouchableHighlight, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+
+import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
@@ -29,14 +31,14 @@ export default class SignupScreen extends Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.fullPage}>
+            <CustomSafeAreaView backgroundColor="#efefef">
                 <CustomStatusBar />
                 <View style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
                             placeholder="Email Address"
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ login: txt }) }}
                             style={styles.textInput}
@@ -69,7 +71,7 @@ export default class SignupScreen extends Component {
                         answer="Log in."
                     />
                 </View>
-            </SafeAreaView>
+            </CustomSafeAreaView>
         );
     }
 }

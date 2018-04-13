@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, FlatList, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Button, FlatList, Picker, Text, StyleSheet, View } from 'react-native';
+
+import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import TopMenuComponent from "../components/TopMenuComponent";
 import BottomMenuComponent from "../components/BottomMenuComponent";
@@ -40,20 +42,20 @@ export default class CouponsScreen extends Component {
     render() {
         if (!this.state.loaded) {
             return (
-                <SafeAreaView style={styles.frame}>
+                <CustomSafeAreaView backgroundColor="#efefef">
                     <CustomStatusBar />
                     <ActivityIndicator size="large" color="#000" />
-                </SafeAreaView>
+                </CustomSafeAreaView>
             );
 
         }
         return (
-            <SafeAreaView style={styles.frame}>
+            <CustomSafeAreaView backgroundColor="#efefef">
                 <CustomStatusBar />
                 <View style={styles.main}>
                     {this.renderCouponComponents()}
                 </View>
-            </SafeAreaView>
+            </CustomSafeAreaView>
         );
     }
 }

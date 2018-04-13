@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, ActivityIndicator, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, Platform, StyleSheet, Text, View } from 'react-native';
+
+import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import ClothCardComponent from "../components/ClothCardComponent";
 import SwipeUpComponent from "../components/SwipeUpComponent";
@@ -64,7 +66,7 @@ export default class ClothesSwipeScreen extends Component {
     render() {
         if (this.state.finished) {
             return (
-                <SafeAreaView style={styles.whiteframe}>
+                <CustomSafeAreaView>
                     <View style={styles.frame}>
                         <CustomStatusBar />
                         <View style={styles.top}>
@@ -78,13 +80,13 @@ export default class ClothesSwipeScreen extends Component {
                             />
                         </View>
                     </View>
-                </SafeAreaView>
+                </CustomSafeAreaView>
             );
         }
 
         if (!this.state.nextItemsLoaded) {
             return (
-                <SafeAreaView style={styles.whiteframe}>
+                <CustomSafeAreaView>
                     <View style={styles.frame}>
                         <CustomStatusBar />
                         <View style={styles.top}>
@@ -94,12 +96,12 @@ export default class ClothesSwipeScreen extends Component {
                             <ActivityIndicator size="large" color="#000" />
                         </View>
                     </View>
-                </SafeAreaView>
+                </CustomSafeAreaView>
             );
         }
 
         return (
-            <SafeAreaView style={styles.whiteframe}>
+            <CustomSafeAreaView>
                 <View style={styles.frame}>
                     <CustomStatusBar />
                     <View style={styles.top}>
@@ -107,7 +109,7 @@ export default class ClothesSwipeScreen extends Component {
                     </View>
                     {this.renderSwipeUpComponents()}
                 </View>
-            </SafeAreaView>
+            </CustomSafeAreaView>
         );
     }
 }
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
     whiteframe: {
         backgroundColor: "white",
         flex: 1,
+        zIndex: 40,
     },
     frame: {
         backgroundColor: "#efefef",

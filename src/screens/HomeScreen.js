@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, Picker, Text, StyleSheet, View } from 'react-native';
+
+import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import api from "../Api";
 
@@ -60,7 +62,7 @@ export default class HomeScreen extends Component {
     
     render() {
         return (
-            <SafeAreaView style={styles.frame}>
+            <CustomSafeAreaView>
                 <CustomStatusBar />
                 <View style={styles.panel}>
                     <Text style={styles.title}>Prototype</Text>
@@ -71,7 +73,7 @@ export default class HomeScreen extends Component {
                         title="Submit"
                     />
                 </View>
-            </SafeAreaView>
+            </CustomSafeAreaView>
         );
     }
 }

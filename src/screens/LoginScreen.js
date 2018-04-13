@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, TextInput, TouchableHighlight, ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+
+import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
@@ -30,14 +32,14 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.fullPage}>
+            <CustomSafeAreaView backgroundColor="#efefef">
                 <CustomStatusBar />
                 <View style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
                     <View style={styles.form}>
                         <TextInput
                             placeholder="Email Address"
-                            autoCapitalize={false}
+                            autoCapitalize="none"
                             keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ login: txt }) }}
                             style={styles.textInput}
@@ -70,7 +72,7 @@ export default class LoginScreen extends Component {
                         answer="Sign up."
                     />
                 </View>
-            </SafeAreaView>
+            </CustomSafeAreaView>
         );
     }
 }
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: '#ccc',
         shadowColor: "black",
-        shadowOffset: {width: 0, height: -1},
+        shadowOffset: { width: 0, height: -1 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
     },
@@ -120,7 +122,7 @@ const styles = StyleSheet.create({
     fbSeparator: {
         //backgroundColor: "red",
         flexDirection: "row",
-        justifyContent:"center",
+        justifyContent: "center",
         alignItems: "center",
         marginBottom: 10,
     },
