@@ -35,8 +35,9 @@ export default class SignupScreen extends Component {
                     <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
-                            keyboardType="email-address"
                             placeholder="Email Address"
+                            autoCapitalize={false}
+                            keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ login: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"

@@ -36,8 +36,9 @@ export default class LoginScreen extends Component {
                     <Text style={styles.title}>Prototype login</Text>
                     <View style={styles.form}>
                         <TextInput
-                            keyboardType="email-address"
                             placeholder="Email Address"
+                            autoCapitalize={false}
+                            keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ login: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
@@ -52,7 +53,7 @@ export default class LoginScreen extends Component {
                         <View style={styles.loginButton}>
                             <Button
                                 onPress={this.login}
-                                title={this.state.loading ? "Loggin you in..." : "Log in"}
+                                title={this.state.loading ? "Logging you in..." : "Log in"}
                             />
                         </View>
                         <View style={styles.fbSeparator}>
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: '#ccc',
         shadowColor: "black",
-        shadowOffset: {width: 0, height: -2},
+        shadowOffset: {width: 0, height: -1},
         shadowOpacity: 0.1,
         shadowRadius: 1,
     },
