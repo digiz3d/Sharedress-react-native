@@ -4,7 +4,8 @@ import { Platform, StatusBar, View} from 'react-native';
 const CustomStatusBar = (props) => {
     return  (
             <StatusBar
-                backgroundColor={props.color ? props.color : "#efefef"}
+                translucent
+                backgroundColor="transparent"
                 barStyle="dark-content"
             />
     );
