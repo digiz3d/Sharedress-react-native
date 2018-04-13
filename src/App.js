@@ -24,7 +24,7 @@ const AppTab = TabNavigator(
         tabBarPosition: 'bottom',
         lazy: false,
         tabBarOptions: {
-            renderIndicator: () => null, // that disable the tab indicator
+            renderIndicator: () => null, // disable the tab indicator on android
             upperCaseLabel: false,
             style: {
                 backgroundColor: "white",
