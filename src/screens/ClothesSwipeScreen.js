@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, Platform, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -46,7 +46,7 @@ export default class ClothesSwipeScreen extends Component {
 
     renderSwipeUpComponents() {
         return (
-            <View style={styles.main}>
+            <SafeAreaView style={styles.main}>
                 <SwipeUpComponent
                     swipedUp={this.swipedUp}
                     id={this.state.set[0].id}
@@ -59,57 +59,51 @@ export default class ClothesSwipeScreen extends Component {
                     name={this.state.set[1].name}
                     image={this.state.set[1].image}
                 />
-            </View>
+            </SafeAreaView>
         );
     }
 
     render() {
         if (this.state.finished) {
             return (
-                <CustomSafeAreaView>
-                    <View style={styles.frame}>
-                        <CustomStatusBar />
-                        <View style={styles.top}>
-                            <TopMenuComponent />
-                        </View>
-                        <View style={styles.finished}>
-                            <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
-                            <Button
-                                title="Recommencer"
-                                onPress={this.restartApi}
-                            />
-                        </View>
-                    </View>
-                </CustomSafeAreaView>
+                <View style={styles.frame}>
+                    <CustomStatusBar />
+                    <SafeAreaView style={styles.top}>
+                        <TopMenuComponent />
+                    </SafeAreaView>
+                    <SafeAreaView style={styles.finished}>
+                        <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
+                        <Button
+                            title="Recommencer"
+                            onPress={this.restartApi}
+                        />
+                    </SafeAreaView>
+                </View>
             );
         }
 
         if (!this.state.nextItemsLoaded) {
             return (
-                <CustomSafeAreaView>
-                    <View style={styles.frame}>
-                        <CustomStatusBar />
-                        <View style={styles.top}>
-                            <TopMenuComponent />
-                        </View>
-                        <View style={styles.loading}>
-                            <ActivityIndicator size="large" color="#000" />
-                        </View>
-                    </View>
-                </CustomSafeAreaView>
+                <View style={styles.frame}>
+                    <CustomStatusBar />
+                    <SafeAreaView style={styles.top}>
+                        <TopMenuComponent />
+                    </SafeAreaView>
+                    <SafeAreaView style={styles.loading}>
+                        <ActivityIndicator size="large" color="#000" />
+                    </SafeAreaView>
+                </View>
             );
         }
 
         return (
-            <CustomSafeAreaView>
-                <View style={styles.frame}>
-                    <CustomStatusBar />
-                    <View style={styles.top}>
-                        <TopMenuComponent />
-                    </View>
-                    {this.renderSwipeUpComponents()}
-                </View>
-            </CustomSafeAreaView>
+            <View style={styles.frame}>
+                <CustomStatusBar />
+                <SafeAreaView style={styles.top}>
+                    <TopMenuComponent />
+                </SafeAreaView>
+                {this.renderSwipeUpComponents()}
+            </View>
         );
     }
 }

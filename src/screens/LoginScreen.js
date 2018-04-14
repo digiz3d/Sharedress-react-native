@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -32,9 +32,9 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <CustomSafeAreaView backgroundColor="#efefef">
+            <View style={{flex:1}}>
                 <CustomStatusBar />
-                <View style={styles.registerBackground}>
+                <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
                     <View style={styles.form}>
                         <TextInput
@@ -64,15 +64,15 @@ export default class LoginScreen extends Component {
                             <View style={styles.fbSeparatorLine} />
                         </View>
                     </View>
-                </View>
-                <View style={styles.bottomMenu}>
+                </SafeAreaView>
+                <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.gotoSignup}
                         question="Don't have an account ?"
                         answer="Sign up."
                     />
-                </View>
-            </CustomSafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }

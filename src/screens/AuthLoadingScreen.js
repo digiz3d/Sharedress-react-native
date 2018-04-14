@@ -12,10 +12,10 @@ export default class AuthLoadingScreen extends Component {
 
     render() {
         return (
-            <CustomSafeAreaView>
+            <SafeAreaView style={{flex:1}}>
                 <CustomStatusBar />
                 <ActivityIndicator />
-            </CustomSafeAreaView>
+            </SafeAreaView>
         );
     }
 }

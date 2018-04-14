@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, TextInput, TouchableHighlight, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { Button, TextInput, TouchableHighlight, ActivityIndicator, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -31,9 +31,9 @@ export default class SignupScreen extends Component {
 
     render() {
         return (
-            <CustomSafeAreaView backgroundColor="#efefef">
+            <View style={{flex:1}}>
                 <CustomStatusBar />
-                <View style={styles.registerBackground}>
+                <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
@@ -63,15 +63,15 @@ export default class SignupScreen extends Component {
                             title={this.state.loading ? "Signing you up..." : "Sign up"}
                         />
                     </View>
-                </View>
-                <View style={styles.bottomMenu}>
+                </SafeAreaView>
+                <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.goBack}
                         question="Already have an account ?"
                         answer="Log in."
                     />
-                </View>
-            </CustomSafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
