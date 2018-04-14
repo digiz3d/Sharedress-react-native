@@ -66,7 +66,7 @@ export default class ClothesSwipeScreen extends Component {
         if (this.state.finished) {
             return (
                 <View style={styles.fullPage}>
-                    <CustomStatusBar />
+                    <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
                         <TopMenuComponent />
                     </SafeAreaView>
@@ -84,7 +84,7 @@ export default class ClothesSwipeScreen extends Component {
         if (!this.state.nextItemsLoaded) {
             return (
                 <View style={styles.fullPage}>
-                    <CustomStatusBar />
+                    <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
                         <TopMenuComponent />
                     </SafeAreaView>
@@ -97,7 +97,7 @@ export default class ClothesSwipeScreen extends Component {
 
         return (
             <View style={styles.fullPage}>
-                <CustomStatusBar />
+                <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
                     <TopMenuComponent />
                 </SafeAreaView>
@@ -109,11 +109,6 @@ export default class ClothesSwipeScreen extends Component {
 
 
 const styles = StyleSheet.create({
-    whiteframe: {
-        backgroundColor: "white",
-        flex: 1,
-        zIndex: 40,
-    },
     fullPage: {
         flex: 1,
         backgroundColor: "#efefef",

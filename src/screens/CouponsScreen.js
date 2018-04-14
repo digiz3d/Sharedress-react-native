@@ -42,19 +42,19 @@ export default class CouponsScreen extends Component {
         if (!this.state.loaded) {
             return (
                 <SafeAreaView style={styles.fullPage}>
-                    <CustomStatusBar />
+                    <CustomStatusBar color="white" />
                     <ActivityIndicator size="large" color="#000" />
                 </SafeAreaView>
             );
 
         }
         return (
-            <SafeAreaView style={styles.fullPage}>
-                <CustomStatusBar />
-                <View style={styles.main}>
+            <View style={styles.fullPage}>
+                <CustomStatusBar color="white" />
+                <SafeAreaView style={styles.main}>
                     {this.renderCouponComponents()}
-                </View>
-            </SafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
