@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, TextInput, TouchableHighlight, ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
@@ -31,9 +30,9 @@ export default class SignupScreen extends Component {
 
     render() {
         return (
-            <CustomSafeAreaView backgroundColor="#efefef">
+            <View style={styles.fullPage}>
                 <CustomStatusBar />
-                <View style={styles.registerBackground}>
+                <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
@@ -63,15 +62,15 @@ export default class SignupScreen extends Component {
                             title={this.state.loading ? "Signing you up..." : "Sign up"}
                         />
                     </View>
-                </View>
-                <View style={styles.bottomMenu}>
+                </SafeAreaView>
+                <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.goBack}
                         question="Already have an account ?"
                         answer="Log in."
                     />
-                </View>
-            </CustomSafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-around",
         alignItems: "center",
-        padding: 10,
     },
     title : {
         fontSize: 30,
@@ -99,9 +97,11 @@ const styles = StyleSheet.create({
         shadowOffset: {width: 0, height: -2},
         shadowOpacity: 0.1,
         shadowRadius: 1,
+        backgroundColor: "white",
     },
     form : {
         width: "100%",
+        paddingHorizontal: 10,
     },
     textInput: {
         backgroundColor: "white",

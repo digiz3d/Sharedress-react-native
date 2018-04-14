@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Picker, Text, StyleSheet, View } from 'react-native';
+import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import api from "../Api";
 
@@ -62,9 +61,9 @@ export default class HomeScreen extends Component {
     
     render() {
         return (
-            <CustomSafeAreaView>
+            <View style={styles.fullPage}>
                 <CustomStatusBar />
-                <View style={styles.panel}>
+                <SafeAreaView style={styles.panel}>
                     <Text style={styles.title}>Prototype</Text>
                     {this.renderAgePicker()}
                     {this.renderSexPicker()}
@@ -72,13 +71,17 @@ export default class HomeScreen extends Component {
                         onPress={this.submit}
                         title="Submit"
                     />
-                </View>
-            </CustomSafeAreaView>
+                </SafeAreaView>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    fullPage: {
+        flex: 1,
+        backgroundColor: "#efefef"
+    },
     frame: {
         backgroundColor: "#eee",
         flex: 1,
