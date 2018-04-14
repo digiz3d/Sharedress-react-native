@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import ClothCardComponent from "../components/ClothCardComponent";
 import SwipeUpComponent from "../components/SwipeUpComponent";
@@ -66,7 +65,7 @@ export default class ClothesSwipeScreen extends Component {
     render() {
         if (this.state.finished) {
             return (
-                <View style={styles.frame}>
+                <View style={styles.fullPage}>
                     <CustomStatusBar />
                     <SafeAreaView style={styles.top}>
                         <TopMenuComponent />
@@ -84,7 +83,7 @@ export default class ClothesSwipeScreen extends Component {
 
         if (!this.state.nextItemsLoaded) {
             return (
-                <View style={styles.frame}>
+                <View style={styles.fullPage}>
                     <CustomStatusBar />
                     <SafeAreaView style={styles.top}>
                         <TopMenuComponent />
@@ -97,7 +96,7 @@ export default class ClothesSwipeScreen extends Component {
         }
 
         return (
-            <View style={styles.frame}>
+            <View style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.top}>
                     <TopMenuComponent />
@@ -115,9 +114,9 @@ const styles = StyleSheet.create({
         flex: 1,
         zIndex: 40,
     },
-    frame: {
-        backgroundColor: "#efefef",
+    fullPage: {
         flex: 1,
+        backgroundColor: "#efefef",
     },
     top: {
         //backgroundColor: "red",

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
@@ -32,7 +31,7 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <View style={{flex:1}}>
+            <View style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
@@ -86,7 +85,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-around",
         alignItems: "center",
-        padding: 10,
     },
     title: {
         fontSize: 30,
@@ -100,9 +98,11 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: -1 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
+        backgroundColor: "white",
     },
     form: {
         width: "100%",
+        paddingHorizontal: 10,
     },
     textInput: {
         backgroundColor: "white",

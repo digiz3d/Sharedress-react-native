@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, FlatList, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import TopMenuComponent from "../components/TopMenuComponent";
 import BottomMenuComponent from "../components/BottomMenuComponent";
@@ -42,7 +41,7 @@ export default class CouponsScreen extends Component {
     render() {
         if (!this.state.loaded) {
             return (
-                <SafeAreaView style={{backgroundColor:"#efefef"}}>
+                <SafeAreaView style={styles.fullPage}>
                     <CustomStatusBar />
                     <ActivityIndicator size="large" color="#000" />
                 </SafeAreaView>
@@ -50,7 +49,7 @@ export default class CouponsScreen extends Component {
 
         }
         return (
-            <SafeAreaView style={{backgroundColor:"#efefef"}}>
+            <SafeAreaView style={styles.fullPage}>
                 <CustomStatusBar />
                 <View style={styles.main}>
                     {this.renderCouponComponents()}
@@ -61,9 +60,9 @@ export default class CouponsScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    frame: {
-        backgroundColor: "#efefef",
+    fullPage: {
         flex: 1,
+        backgroundColor: "#efefef",
     },
     top: {
         //backgroundColor: "red",

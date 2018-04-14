@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
 
-import CustomSafeAreaView from '../components/CustomSafeAreaView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import api from "../Api";
 
@@ -62,7 +61,7 @@ export default class HomeScreen extends Component {
     
     render() {
         return (
-            <View style={{flex:1}}>
+            <View style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.panel}>
                     <Text style={styles.title}>Prototype</Text>
@@ -79,6 +78,10 @@ export default class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    fullPage: {
+        flex: 1,
+        backgroundColor: "#efefef"
+    },
     frame: {
         backgroundColor: "#eee",
         flex: 1,
