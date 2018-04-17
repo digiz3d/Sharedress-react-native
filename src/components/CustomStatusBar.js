@@ -8,7 +8,7 @@ const CustomStatusBar = (props) => {
     let color = props.color ? props.color : "transparent";
     let height = 0;
     if (isAndroid) {
-        height = 24
+        height = 24;
     }
     else {
         if (iOSversion <= 10) {
