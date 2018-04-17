@@ -27,7 +27,7 @@ const CustomStatusBar = (props) => {
     }
     
     return (
-        <View style={{ height: height }}>
+        <View style={{ height: height, zIndex: 3 }}>
             <StatusBar
                 translucent
                 backgroundColor={color}
