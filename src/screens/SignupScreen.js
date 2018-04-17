@@ -21,7 +21,7 @@ export default class SignupScreen extends Component {
         api.login("test", "test").
             then(() => {
                 // TODO: implement a real token creation so we can store it and stay logged in
-                this.props.navigation.navigate("App");
+                this.props.navigation.navigate("Signup2");
             })
             .catch(() => {
                 this.setState({ loading: false });
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         width: "100%",
         borderWidth: 0,
-        borderRadius: 10,
+        borderRadius: 5,
         borderColor: "silver",
         borderWidth: 1,
         marginBottom: 10,

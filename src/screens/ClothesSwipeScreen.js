@@ -13,8 +13,11 @@ export default class ClothesSwipeScreen extends Component {
         this.state = {
             nextItemsLoaded: false,
             set: [],
-            finished: false
+            finished: false,
         };
+
+        this.firstCardRef = null;
+        this.secondCardRef = null;
     }
 
     componentDidMount() {
@@ -37,11 +40,30 @@ export default class ClothesSwipeScreen extends Component {
         });
 
         api.getNextSet().then((val) => {
-            this.setState({ set: val, nextItemsLoaded: true, finished: false })
+            this.setState({ set: val,
+                nextItemsLoaded: true,
+                finished: false,
+            });
         }).catch((reason) => {
             this.setState({ finished: true });
         });
-    };
+    }
+
+    lockFirstCard = () => {
+        if (this.firstCardRef) {
+            this.firstCardRef.lock();
+            //console.warn("locked first card");
+        }
+        //console.warn("AFTER locked first card");
+    }
+
+    lockSecondCard = () => {
+        if (this.secondCardRef) {
+            this.secondCardRef.lock();
+            //console.warn("locked second card");
+        }
+        //console.warn("AFTER locked second card");
+    }
 
     renderSwipeUpComponents() {
         return (
@@ -51,12 +73,16 @@ export default class ClothesSwipeScreen extends Component {
                     id={this.state.set[0].id}
                     name={this.state.set[0].name}
                     image={this.state.set[0].image}
+                    onSwipedUp={this.lockSecondCard}
+                    ref={(r) => this.firstCardRef = r}
                 />
                 <SwipeUpComponent
                     swipedUp={this.swipedUp}
                     id={this.state.set[1].id}
                     name={this.state.set[1].name}
                     image={this.state.set[1].image}
+                    onSwipedUp={this.lockFirstCard}
+                    ref={(r) => this.secondCardRef = r}
                 />
             </SafeAreaView>
         );
@@ -68,7 +94,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent />
+                        <TopMenuComponent text="Prototype" />
                     </SafeAreaView>
                     <SafeAreaView style={styles.finished}>
                         <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
@@ -86,7 +112,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent />
+                        <TopMenuComponent text="Prototype" />
                     </SafeAreaView>
                     <SafeAreaView style={styles.loading}>
                         <ActivityIndicator size="large" color="#000" />
@@ -99,7 +125,7 @@ export default class ClothesSwipeScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent />
+                    <TopMenuComponent text="Prototype" />
                 </SafeAreaView>
                 {this.renderSwipeUpComponents()}
             </View>

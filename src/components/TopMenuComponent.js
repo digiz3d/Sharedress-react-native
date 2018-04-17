@@ -5,7 +5,7 @@ export default class TopMenuComponent extends Component {
     render() {
         return (
             <View style={styles.menu}>
-                <Text style={styles.title}>Prototype</Text>
+                <Text style={styles.title}>{this.props.text}</Text>
             </View>
         );
     }
