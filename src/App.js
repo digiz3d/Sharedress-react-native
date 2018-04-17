@@ -8,6 +8,7 @@ import SignupScreen from './screens/SignupScreen';
 import SignupParametersScreen from './screens/SignupParametersScreen';
 
 import ClothesSwipeScreen from './screens/ClothesSwipeScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import VouchersScreen from './screens/VouchersScreen';
 
 import api from './Api';
@@ -18,6 +19,7 @@ const AppTab = TabNavigator(
     {
         Swipe: ClothesSwipeScreen,
         Vouchers: VouchersScreen,
+        Settings: SettingsScreen,
     },
     {
         swipeEnabled: false,
