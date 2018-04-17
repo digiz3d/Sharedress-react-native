@@ -5,8 +5,7 @@ import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation'
 import AuthLoadingScreen from "./screens/AuthLoadingScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
-
-//import HomeScreen from "./screens/HomeScreen";
+import SignupParametersScreen from "./screens/SignupParametersScreen";
 
 import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
 import CouponsScreen from "./screens/CouponsScreen";
@@ -39,6 +38,7 @@ const AuthTab = StackNavigator(
     {
         Login: LoginScreen,
         Signup: SignupScreen,
+        Signup2 : SignupParametersScreen, 
     },
     {
         headerMode: 'none', // we don't want a blank header
