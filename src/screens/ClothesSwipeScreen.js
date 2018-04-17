@@ -13,7 +13,9 @@ export default class ClothesSwipeScreen extends Component {
         this.state = {
             nextItemsLoaded: false,
             set: [],
-            finished: false
+            finished: false,
+            firstCardLocked: false,
+            secondCardLocked: false,
         };
     }
 
@@ -37,11 +39,24 @@ export default class ClothesSwipeScreen extends Component {
         });
 
         api.getNextSet().then((val) => {
-            this.setState({ set: val, nextItemsLoaded: true, finished: false })
+            this.setState({ set: val,
+                nextItemsLoaded: true,
+                finished: false,
+                firstCardLocked: false,
+                secondCardLocked: false,
+            });
         }).catch((reason) => {
             this.setState({ finished: true });
         });
-    };
+    }
+
+    lockFirstCard = () => {
+        this.setState({firstCardLocked: true});
+    }
+
+    lockSecondCard = () => {
+        this.setState({secondCardLocked: true});
+    }
 
     renderSwipeUpComponents() {
         return (
@@ -51,12 +66,16 @@ export default class ClothesSwipeScreen extends Component {
                     id={this.state.set[0].id}
                     name={this.state.set[0].name}
                     image={this.state.set[0].image}
+                    onSwipedUp={this.lockSecondCard}
+                    locked={this.state.firstCardLocked}
                 />
                 <SwipeUpComponent
                     swipedUp={this.swipedUp}
                     id={this.state.set[1].id}
                     name={this.state.set[1].name}
                     image={this.state.set[1].image}
+                    onSwipedUp={this.lockFirstCard}
+                    locked={this.state.secondCardLocked}
                 />
             </SafeAreaView>
         );

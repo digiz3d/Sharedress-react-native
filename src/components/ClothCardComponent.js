@@ -6,7 +6,7 @@ export default class ClothCardComponent extends Component {
         return (
             <View style={styles.card}>
                 <Image resizeMode="cover" style={styles.image} source={{uri:this.props.uri}} />
-                <Text style={styles.txt}>{this.props.txt}</Text>
+                {/*<Text style={styles.txt}>{this.props.txt}</Text>*/}
             </View>
         );
     }

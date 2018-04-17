@@ -27,13 +27,20 @@ export default class SwipeUpComponent extends Component {
         },
     };
 
+    static getDerivedStateFromProps(nextProps, previousState) {
+        const v = {};
+        v.locked = nextProps.locked;
+        return v;
+    };
+
     constructor(props) {
         super(props);
 
         this.state = {
             pan: new Animated.ValueXY(),
             card: this.props.card,
-            scale: new Animated.Value(1)
+            scale: new Animated.Value(1),
+            locked: this.props.locked,
         };
 
         this.lastX = 0;
@@ -43,9 +50,9 @@ export default class SwipeUpComponent extends Component {
 
         this._panResponder = PanResponder.create({
             onMoveShouldSetPanResponderCapture: (e, gestureState) => {
-                if (
+                if (!this.state.locked && (
                     Math.abs(gestureState.dx) > 3 ||
-                    Math.abs(gestureState.dy) > 3
+                    Math.abs(gestureState.dy) > 3)
                 ) {
                     return true;
                 }
@@ -102,7 +109,7 @@ export default class SwipeUpComponent extends Component {
                     Math.abs(this.state.pan.y._value) > SWIPE_THRESHOLD;
 
                 if (hasSwipedUp) {
-                    this.props.handleSwipeUp(this.state.card);
+                    this.props.onSwipedUp(this.state.card);
                     // allows the card to go further than the screen
                     let velocityY = gestureState.vy < MINIMUM_SWIPE_VELOCITY  ? gestureState.vy : MINIMUM_SWIPE_VELOCITY;
 
@@ -123,7 +130,7 @@ export default class SwipeUpComponent extends Component {
             }
         });
     }
-
+    
     _resetState() {
         /*
         Animated.timing(this.state.scale, {
