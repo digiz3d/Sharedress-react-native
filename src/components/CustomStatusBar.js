@@ -1,27 +1,39 @@
 import React from 'react';
 import { Platform, StatusBar, View } from 'react-native';
 
-const CustomStatusBar = (props) => {
-    let android = Platform.OS == "android";
-    let color = props.color ? props.color : "transparent";
+const iOSversion = parseInt(Platform.Version, 10);
+const isAndroid = Platform.OS == "android";
 
-    if (android) {
+const CustomStatusBar = (props) => {
+    let color = props.color ? props.color : "transparent";
+    let height = 0;
+    if (isAndroid) {
+        height = 24
+    }
+    else {
+        if (iOSversion <= 10) {
+            height = 20;
+        }
+    }
+
+    if (height == 0) {
         return (
-            <View style={{ height: 24 }}>
-                <StatusBar
-                    translucent
-                    backgroundColor={color}
-                    barStyle="dark-content"
-                />
-            </View>
+            <StatusBar
+                translucent
+                backgroundColor={color}
+                barStyle="dark-content"
+            />
         );
     }
+    
     return (
-        <StatusBar
-            translucent
-            backgroundColor={color}
-            barStyle="dark-content"
-        />
+        <View style={{ height: height }}>
+            <StatusBar
+                translucent
+                backgroundColor={color}
+                barStyle="dark-content"
+            />
+        </View>
     );
 
 };
