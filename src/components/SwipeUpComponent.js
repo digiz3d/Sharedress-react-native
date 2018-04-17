@@ -27,12 +27,6 @@ export default class SwipeUpComponent extends Component {
         },
     };
 
-    static getDerivedStateFromProps(nextProps, previousState) {
-        const v = {};
-        v.locked = nextProps.locked;
-        return v;
-    };
-
     constructor(props) {
         super(props);
 
@@ -40,7 +34,7 @@ export default class SwipeUpComponent extends Component {
             pan: new Animated.ValueXY(),
             card: this.props.card,
             scale: new Animated.Value(1),
-            locked: this.props.locked,
+            locked: false,
         };
 
         this.lastX = 0;
@@ -65,7 +59,7 @@ export default class SwipeUpComponent extends Component {
                 }).start();
 
                 this.setState(state => {
-                    return {dragging: true};
+                    return { dragging: true };
                 });
 
                 this.state.pan.setOffset({
@@ -101,7 +95,7 @@ export default class SwipeUpComponent extends Component {
                     this.props.onClickHandler(this.state.card);
                 }
 
-                let hasSwipedUp = gestureState.vy < -1 && gestureState.dy < SWIPE_THRESHOLD  ;
+                let hasSwipedUp = gestureState.vy < -1 && gestureState.dy < SWIPE_THRESHOLD;
 
                 //alert(gestureState.vy +" et "+gestureState.dy);
 
@@ -109,9 +103,9 @@ export default class SwipeUpComponent extends Component {
                     Math.abs(this.state.pan.y._value) > SWIPE_THRESHOLD;
 
                 if (hasSwipedUp) {
-                    this.props.onSwipedUp(this.state.card);
+                    this.props.onSwipedUp(/*this.state.card*/);
                     // allows the card to go further than the screen
-                    let velocityY = gestureState.vy < MINIMUM_SWIPE_VELOCITY  ? gestureState.vy : MINIMUM_SWIPE_VELOCITY;
+                    let velocityY = gestureState.vy < MINIMUM_SWIPE_VELOCITY ? gestureState.vy : MINIMUM_SWIPE_VELOCITY;
 
                     this.cardAnimation = Animated.decay(this.state.pan, {
                         velocity: { x: 0, y: velocityY },
@@ -130,7 +124,11 @@ export default class SwipeUpComponent extends Component {
             }
         });
     }
-    
+
+    lock() {
+        this.setState({locked: true});
+    }
+
     _resetState() {
         /*
         Animated.timing(this.state.scale, {
@@ -155,7 +153,7 @@ export default class SwipeUpComponent extends Component {
     renderCard(txt, uri) {
         let { dragging, pan, enter } = this.state;
         let [translateX, translateY] = [pan.x, pan.y];
-        let scale =  this.state.scale;
+        let scale = this.state.scale;
         let animatedCardStyles = {
             transform: [{ translateX }, { translateY }, { scale }]
         };
@@ -165,7 +163,7 @@ export default class SwipeUpComponent extends Component {
                 key={"top"}
                 style={[styles.swipeCard, animatedCardStyles]}
                 {...this._panResponder.panHandlers}>
-                <ClothCardComponent txt={txt} uri={uri}/>
+                <ClothCardComponent txt={txt} uri={uri} />
             </Animated.View>
         );
     }

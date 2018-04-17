@@ -14,9 +14,10 @@ export default class ClothesSwipeScreen extends Component {
             nextItemsLoaded: false,
             set: [],
             finished: false,
-            firstCardLocked: false,
-            secondCardLocked: false,
         };
+
+        this.firstCardRef = null;
+        this.secondCardRef = null;
     }
 
     componentDidMount() {
@@ -42,8 +43,6 @@ export default class ClothesSwipeScreen extends Component {
             this.setState({ set: val,
                 nextItemsLoaded: true,
                 finished: false,
-                firstCardLocked: false,
-                secondCardLocked: false,
             });
         }).catch((reason) => {
             this.setState({ finished: true });
@@ -51,11 +50,19 @@ export default class ClothesSwipeScreen extends Component {
     }
 
     lockFirstCard = () => {
-        this.setState({firstCardLocked: true});
+        if (this.firstCardRef) {
+            this.firstCardRef.lock();
+            //console.warn("locked first card");
+        }
+        //console.warn("AFTER locked first card");
     }
 
     lockSecondCard = () => {
-        this.setState({secondCardLocked: true});
+        if (this.secondCardRef) {
+            this.secondCardRef.lock();
+            //console.warn("locked second card");
+        }
+        //console.warn("AFTER locked second card");
     }
 
     renderSwipeUpComponents() {
@@ -67,7 +74,7 @@ export default class ClothesSwipeScreen extends Component {
                     name={this.state.set[0].name}
                     image={this.state.set[0].image}
                     onSwipedUp={this.lockSecondCard}
-                    locked={this.state.firstCardLocked}
+                    ref={(r) => this.firstCardRef = r}
                 />
                 <SwipeUpComponent
                     swipedUp={this.swipedUp}
@@ -75,7 +82,7 @@ export default class ClothesSwipeScreen extends Component {
                     name={this.state.set[1].name}
                     image={this.state.set[1].image}
                     onSwipedUp={this.lockFirstCard}
-                    locked={this.state.secondCardLocked}
+                    ref={(r) => this.secondCardRef = r}
                 />
             </SafeAreaView>
         );
