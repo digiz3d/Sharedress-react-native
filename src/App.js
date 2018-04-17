@@ -2,21 +2,22 @@ import React, { Component } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation';
 
-import AuthLoadingScreen from "./screens/AuthLoadingScreen";
-import LoginScreen from "./screens/LoginScreen";
-import SignupScreen from "./screens/SignupScreen";
-import SignupParametersScreen from "./screens/SignupParametersScreen";
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import LoginScreen from './screens/LoginScreen';
+import SignupScreen from './screens/SignupScreen';
+import SignupParametersScreen from './screens/SignupParametersScreen';
 
-import ClothesSwipeScreen from "./screens/ClothesSwipeScreen";
-import CouponsScreen from "./screens/CouponsScreen";
+import ClothesSwipeScreen from './screens/ClothesSwipeScreen';
+import VouchersScreen from './screens/VouchersScreen';
 
-import api from "./Api";
+import api from './Api';
+
 
 // TODO: add a settings screen
 const AppTab = TabNavigator(
     {
         Swipe: ClothesSwipeScreen,
-        Coupons: CouponsScreen,
+        Vouchers: VouchersScreen,
     },
     {
         swipeEnabled: false,

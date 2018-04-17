@@ -68,7 +68,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent />
+                        <TopMenuComponent text="Prototype" />
                     </SafeAreaView>
                     <SafeAreaView style={styles.finished}>
                         <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
@@ -86,7 +86,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent />
+                        <TopMenuComponent text="Prototype" />
                     </SafeAreaView>
                     <SafeAreaView style={styles.loading}>
                         <ActivityIndicator size="large" color="#000" />
@@ -99,7 +99,7 @@ export default class ClothesSwipeScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent />
+                    <TopMenuComponent text="Prototype" />
                 </SafeAreaView>
                 {this.renderSwipeUpComponents()}
             </View>

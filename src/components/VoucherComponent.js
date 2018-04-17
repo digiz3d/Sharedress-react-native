@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 
-export default class CouponComponent extends Component {
+export default class VoucherComponent extends Component {
     render() {
         return (
             <View style={styles.horizontalCard}>

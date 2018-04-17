@@ -4,30 +4,30 @@ import { ActivityIndicator, Button, FlatList, Picker, Text, SafeAreaView, StyleS
 import CustomStatusBar from '../components/CustomStatusBar';
 import TopMenuComponent from "../components/TopMenuComponent";
 import BottomMenuComponent from "../components/BottomMenuComponent";
-import CouponComponent from "../components/CouponComponent";
+import VoucherComponent from "../components/VoucherComponent";
 import api from "../Api";
 
-export default class CouponsScreen extends Component {
+export default class VouchersScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loaded: false,
-            coupons: []
+            vouchers: []
         };
     }
 
     componentDidMount() {
-        api.getMyCoupons().then((val) => {
-            this.setState({ coupons: val, loaded: true });
+        api.getMyVouchers().then((val) => {
+            this.setState({ vouchers: val, loaded: true });
         })
     }
 
-    renderCouponComponents() {
+    renderVouchersComponents() {
         return (
             <FlatList 
                 style={{flex: 1}}
-                data={this.state.coupons}
-                renderItem={({item}) => <CouponComponent
+                data={this.state.vouchers}
+                renderItem={({item}) => <VoucherComponent
                     id={item.id}
                     name={item.name}
                     value={item.value}
@@ -51,9 +51,10 @@ export default class CouponsScreen extends Component {
         return (
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
-                <SafeAreaView style={styles.main}>
-                    {this.renderCouponComponents()}
+                <SafeAreaView style={styles.top}>
+                    <TopMenuComponent text="Vouchers" />
                 </SafeAreaView>
+                {this.renderVouchersComponents()}
             </View>
         );
     }
