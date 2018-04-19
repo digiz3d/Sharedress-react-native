@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation';
-
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
@@ -13,6 +13,14 @@ import VouchersScreen from './screens/VouchersScreen';
 
 import api from './Api';
 
+function routeNameToIcon(routeName) {
+    switch (routeName) {
+        case 'Swipe': return 'ios-shirt';
+        case 'Vouchers': return 'ios-school';
+        case 'Settings': return 'ios-settings';
+        default: return 'default-icon';
+    }
+}
 
 // TODO: add a settings screen
 const AppTab = TabNavigator(
@@ -22,6 +30,9 @@ const AppTab = TabNavigator(
         Settings: SettingsScreen,
     },
     {
+        navigationOptions: ({ navigation }) => ({
+            tabBarIcon: ({ tintColor, focused }) => (<Ionicons size={24} name={routeNameToIcon(navigation.state.routeName)} color={tintColor} />)
+        }),
         swipeEnabled: false,
         tabBarPosition: 'bottom',
         lazy: false,
@@ -33,6 +44,8 @@ const AppTab = TabNavigator(
             },
             activeTintColor: "black",
             inactiveTintColor: "#444",
+            showIcon: true,
+            showLabel: false,
         }
     }
 );
@@ -41,7 +54,7 @@ const AuthTab = StackNavigator(
     {
         Login: LoginScreen,
         Signup: SignupScreen,
-        Signup2 : SignupParametersScreen, 
+        Signup2: SignupParametersScreen,
     },
     {
         headerMode: 'none', // we don't want a blank header
