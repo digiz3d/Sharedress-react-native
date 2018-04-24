@@ -7,7 +7,6 @@ import CustomStatusBar from '../components/CustomStatusBar';
 
 export default class AuthLoadingScreen extends Component {
     componentDidMount() {
-        // TODO: implement a real token verification and redirect to App if it is valid
         this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.props.navigation.navigate("App");
@@ -17,7 +16,7 @@ export default class AuthLoadingScreen extends Component {
             }
         });
     }
-
+    
     componentWillUnmount() {
         this.authSubscription();
     }

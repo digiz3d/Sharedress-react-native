@@ -9,17 +9,17 @@ import api from "../Api";
 export default class SignupScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading: false };
+        this.state = { email: '', password: '', loading: false };
     }
 
     componentWillMount() {
         // TODO: implement a real token verification and redirect to App if it is valid
         this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                this.props.navigation.navigate("App");
+                this.props.navigation.navigate("Signup2");
             }
             else {
-                this.props.navigation.navigate("Auth");
+                this.setState({loading: false});
             }
         });
     }
@@ -38,34 +38,21 @@ export default class SignupScreen extends Component {
         const { email, password, password2 } = this.state;
 
         if (password == password2) {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
+        firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
             .then((user) => {
                 // If you need to do anything with the user, do it here
                 // The user will be logged in automatically by the
                 // `onAuthStateChanged` listener we set up in App.js earlier
-                console.warn('inscription ok');
-                console.warn(user);
+                //console.warn('inscription ok');
             })
             .catch((error) => {
                 const { code, message } = error;
                 // For details of error codes, see the docs
                 // The message contains the default Firebase string
                 // representation of the error
-                console.warn('erreur dinscription');
-                console.warn(code);
-                console.warn(message);
+                //console.warn('erreur dinscription');
             });
         }
-        /*
-        api.login("test", "test").
-            then(() => {
-                // TODO: implement a real token creation so we can store it and stay logged in
-                this.props.navigation.navigate("Signup2");
-            })
-            .catch(() => {
-                this.setState({ loading: false });
-            });
-            */
     }
 
     render() {

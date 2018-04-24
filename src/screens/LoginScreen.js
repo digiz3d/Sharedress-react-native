@@ -5,11 +5,28 @@ import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
 import api from "../Api";
+import firebase from 'react-native-firebase';
 
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { login: "", password: "", loading: false };
+        this.state = { email: '', password: '', loading: false };
+    }
+
+    componentWillMount() {
+        // TODO: implement a real token verification and redirect to App if it is valid
+        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.props.navigation.navigate("App");
+            }
+            else {
+                this.setState({loading: false});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.authSubscription();
     }
 
     gotoSignup = () => {
@@ -18,15 +35,13 @@ export default class LoginScreen extends Component {
 
     login = () => {
         this.setState({ loading: true });
+        const { email, password } = this.state;
+        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
 
-        api.login(this.state.login, this.state.password).
-            then(() => {
-                // TODO: implement a real token creation so we can store it and stay logged in
-                this.props.navigation.navigate("App");
-            })
-            .catch(() => {
-                this.setState({ loading: false });
-            });
+        }).catch((error) => {
+            console.warn(error);
+            this.setState({loading: false});
+        });
     }
 
     render() {
@@ -40,7 +55,7 @@ export default class LoginScreen extends Component {
                             placeholder="Email Address"
                             autoCapitalize="none"
                             keyboardType="email-address"
-                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            onChangeText={(txt) => { this.setState({ email: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                         />
