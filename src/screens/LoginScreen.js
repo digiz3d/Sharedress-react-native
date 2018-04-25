@@ -1,11 +1,41 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
 import api from "../Api";
 import firebase from 'react-native-firebase';
+
+const facebookLogin = async () => {
+    try {
+        const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+
+        if (result.isCancelled) {
+            throw new Error('User cancelled request'); // Handle this however fits the flow of your app
+        }
+
+        console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
+
+        // get the access token
+        const data = await AccessToken.getCurrentAccessToken();
+
+        if (!data) {
+            throw new Error('Something went wrong obtaining the users access token'); // Handle this however fits the flow of your app
+        }
+
+        // create a new firebase credential with the token
+        const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+
+        // login with credential
+        const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
+
+        console.info(JSON.stringify(currentUser.user.toJSON()))
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -20,7 +50,7 @@ export default class LoginScreen extends Component {
                 this.props.navigation.navigate("App");
             }
             else {
-                this.setState({loading: false});
+                this.setState({ loading: false });
             }
         });
     }
@@ -36,12 +66,16 @@ export default class LoginScreen extends Component {
     login = () => {
         this.setState({ loading: true });
         const { email, password } = this.state;
-        firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
-
-        }).catch((error) => {
-            console.warn(error);
+        if (email !== "" && password !== "") {
+            firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
+            }).catch((error) => {
+                console.warn(error);
+                this.setState({ loading: false });
+            });
+        }
+        else {
             this.setState({loading: false});
-        });
+        }
     }
 
     render() {
@@ -76,6 +110,16 @@ export default class LoginScreen extends Component {
                             <View style={styles.fbSeparatorLine} />
                             <Text style={styles.fbSeparatorOR}>or</Text>
                             <View style={styles.fbSeparatorLine} />
+                        </View>
+                        <View style={styles.loginButton}>
+                            <Button onPress={() => {
+                                try {
+                                    facebookLogin();
+                                }
+                                catch (err) {
+                                    console.warn(err);
+                                }
+                            }} title="Login with facebook" />
                         </View>
                     </View>
                 </SafeAreaView>
