@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import TopMenuComponent from "../components/TopMenuComponent";
+import strings from '../Language';
 
 export default class SettingsScreen extends Component {
     render () {
@@ -10,7 +11,7 @@ export default class SettingsScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent text="Settings"/>
+                    <TopMenuComponent text={strings.settings}/>
                 </SafeAreaView>
             </View>
         );

@@ -6,6 +6,7 @@ import TopMenuComponent from "../components/TopMenuComponent";
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import VoucherComponent from "../components/VoucherComponent";
 import api from "../Api";
+import strings from "../Language";
 
 export default class VouchersScreen extends Component {
     constructor(props) {
@@ -52,7 +53,7 @@ export default class VouchersScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent text="Vouchers" />
+                    <TopMenuComponent text={strings.voucher} />
                 </SafeAreaView>
                 {this.renderVouchersComponents()}
             </View>

@@ -4,6 +4,7 @@ import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-nati
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
+import strings from "../Language";
 
 const MIN_AGE = 13;
 const MAX_AGE = 120;
@@ -66,8 +67,8 @@ export default class SignupParametersScreen extends Component {
                 selectedValue={this.state.sex}
                 onValueChange={(itemValue, itemIndex) => this.setState({ sex: itemValue })}
             >
-                <Picker.Item label="Female" value="female" />
-                <Picker.Item label="Male" value="male" />
+                <Picker.Item label={strings.parametersFemale} value="female" />
+                <Picker.Item label={strings.parametersMale} value="male" />
             </Picker>
         );
     }
@@ -83,15 +84,15 @@ export default class SignupParametersScreen extends Component {
                         {this.renderSexPicker()}
                         <Button
                             onPress={this.submit}
-                            title="Submit"
+                            title={strings.submit}
                         />
                     </View>  
                 </SafeAreaView>
                 <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.goToLogin}
-                        question="Already have an account ?"
-                        answer="Log in."
+                        question={strings.signupalready}
+                        answer={strings.answerLogin}
                     />
                 </SafeAreaView>
             </View>
