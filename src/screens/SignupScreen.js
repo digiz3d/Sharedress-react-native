@@ -5,6 +5,8 @@ import firebase from 'react-native-firebase';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
+import strings from "../Language";
+
 
 export default class SignupScreen extends Component {
     constructor(props) {
@@ -63,7 +65,7 @@ export default class SignupScreen extends Component {
                     <Text style={styles.title}>Prototype signup</Text>
                     <View style={styles.form}>
                         <TextInput
-                            placeholder="Email Address"
+                            placeholder={strings.email}
                             autoCapitalize="none"
                             keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ email: txt }) }}
@@ -71,14 +73,14 @@ export default class SignupScreen extends Component {
                             underlineColorAndroid="transparent"
                         />
                         <TextInput
-                            placeholder="Password"
+                            placeholder={strings.password}
                             onChangeText={(txt) => { this.setState({ password: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                             secureTextEntry
                         />
                         <TextInput
-                            placeholder="Password confirmation"
+                            placeholder={strings.confirmation}
                             onChangeText={(txt) => { this.setState({ password2: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
@@ -86,15 +88,15 @@ export default class SignupScreen extends Component {
                         />
                         <Button
                             onPress={this.signup}
-                            title={this.state.loading ? "Signing you up..." : "Sign up"}
+                            title={this.state.loading ? strings.signingYouUp : strings.signUp}
                         />
                     </View>
                 </SafeAreaView>
                 <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.goBack}
-                        question="Already have an account ?"
-                        answer="Log in."
+                        question={strings.signUpAlready}
+                        answer={strings.login}
                     />
                 </SafeAreaView>
             </View>

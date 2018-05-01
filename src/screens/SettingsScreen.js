@@ -4,6 +4,7 @@ import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import CustomStatusBar from '../components/CustomStatusBar';
 import TopMenuComponent from "../components/TopMenuComponent";
 import firebase from 'react-native-firebase';
+import strings from '../Language';
 
 export default class SettingsScreen extends Component {
     componentWillMount() {
@@ -28,7 +29,7 @@ export default class SettingsScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent text="Settings"/>
+                    <TopMenuComponent text={strings.settings}/>
                 </SafeAreaView>
                 <Button title="Logout" onPress={this.logOut}/>
             </View>
