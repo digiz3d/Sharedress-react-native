@@ -2,9 +2,17 @@ package com.sharedressreactnative;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
+import com.facebook.CallbackManager;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.appevents.AppEventsLogger;
 import com.facebook.react.ReactApplication;
+
 import com.babisoft.ReactNativeLocalization.ReactNativeLocalizationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import io.invertase.firebase.RNFirebasePackage;
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -14,6 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -25,8 +38,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new ReactNativeLocalizationPackage(),
-            new VectorIconsPackage()
+            new FBSDKPackage(mCallbackManager),
+            new VectorIconsPackage(),
+            new RNFirebasePackage(),
+                // add/remove these packages as appropriate
+            new RNFirebaseAuthPackage(),
+            new ReactNativeLocalizationPackage()
       );
     }
 
@@ -44,6 +61,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    AppEventsLogger.activateApp(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

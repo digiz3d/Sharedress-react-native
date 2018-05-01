@@ -1,17 +1,64 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
 import api from "../Api";
 import strings from "../Language";
+import firebase from 'react-native-firebase';
+
+const facebookLogin = async () => {
+    try {
+        const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
+
+        if (result.isCancelled) {
+            throw new Error('User cancelled request'); // Handle this however fits the flow of your app
+        }
+
+        console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
+
+        // get the access token
+        const data = await AccessToken.getCurrentAccessToken();
+
+        if (!data) {
+            throw new Error('Something went wrong obtaining the users access token'); // Handle this however fits the flow of your app
+        }
+
+        // create a new firebase credential with the token
+        const credential = firebase.auth.FacebookAuthProvider.credential(data.accessToken);
+
+        // login with credential
+        const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
+
+        console.info(JSON.stringify(currentUser.user.toJSON()))
+    } catch (e) {
+        console.error(e);
+    }
+}
 
 
 export default class LoginScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { login: "", password: "", loading: false };
+        this.state = { email: '', password: '', loading: false };
+    }
+
+    componentWillMount() {
+        // TODO: implement a real token verification and redirect to App if it is valid
+        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.props.navigation.navigate("App");
+            }
+            else {
+                this.setState({ loading: false });
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.authSubscription();
     }
 
     gotoSignup = () => {
@@ -20,15 +67,17 @@ export default class LoginScreen extends Component {
 
     login = () => {
         this.setState({ loading: true });
-
-        api.login(this.state.login, this.state.password).
-            then(() => {
-                // TODO: implement a real token creation so we can store it and stay logged in
-                this.props.navigation.navigate("App");
-            })
-            .catch(() => {
+        const { email, password } = this.state;
+        if (email !== "" && password !== "") {
+            firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
+            }).catch((error) => {
+                console.warn(error);
                 this.setState({ loading: false });
             });
+        }
+        else {
+            this.setState({loading: false});
+        }
     }
 
     render() {
@@ -42,7 +91,7 @@ export default class LoginScreen extends Component {
                             placeholder={strings.email}
                             autoCapitalize="none"
                             keyboardType="email-address"
-                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            onChangeText={(txt) => { this.setState({ email: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                         />
@@ -63,6 +112,16 @@ export default class LoginScreen extends Component {
                             <View style={styles.fbSeparatorLine} />
                             <Text style={styles.fbSeparatorOR}>{strings.or}</Text>
                             <View style={styles.fbSeparatorLine} />
+                        </View>
+                        <View style={styles.loginButton}>
+                            <Button onPress={() => {
+                                try {
+                                    facebookLogin();
+                                }
+                                catch (err) {
+                                    console.warn(err);
+                                }
+                            }} title="Login with facebook" />
                         </View>
                     </View>
                 </SafeAreaView>

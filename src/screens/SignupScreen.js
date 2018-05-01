@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import firebase from 'react-native-firebase';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
@@ -10,7 +11,23 @@ import strings from "../Language";
 export default class SignupScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { loading : false };
+        this.state = { email: '', password: '', loading: false };
+    }
+
+    componentWillMount() {
+        // TODO: implement a real token verification and redirect to App if it is valid
+        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.props.navigation.navigate("Signup2");
+            }
+            else {
+                this.setState({loading: false});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.authSubscription();
     }
 
     goBack = () => {
@@ -20,14 +37,24 @@ export default class SignupScreen extends Component {
     signup = () => {
         this.setState({ loading: true });
 
-        api.login("test", "test").
-            then(() => {
-                // TODO: implement a real token creation so we can store it and stay logged in
-                this.props.navigation.navigate("Signup2");
+        const { email, password, password2 } = this.state;
+
+        if (password == password2) {
+        firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
+            .then((user) => {
+                // If you need to do anything with the user, do it here
+                // The user will be logged in automatically by the
+                // `onAuthStateChanged` listener we set up in App.js earlier
+                //console.warn('inscription ok');
             })
-            .catch(() => {
-                this.setState({ loading: false });
+            .catch((error) => {
+                const { code, message } = error;
+                // For details of error codes, see the docs
+                // The message contains the default Firebase string
+                // representation of the error
+                //console.warn('erreur dinscription');
             });
+        }
     }
 
     render() {
@@ -41,20 +68,20 @@ export default class SignupScreen extends Component {
                             placeholder={strings.email}
                             autoCapitalize="none"
                             keyboardType="email-address"
-                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            onChangeText={(txt) => { this.setState({ email: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                         />
                         <TextInput
                             placeholder={strings.password}
-                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            onChangeText={(txt) => { this.setState({ password: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                             secureTextEntry
                         />
                         <TextInput
                             placeholder={strings.confirmation}
-                            onChangeText={(txt) => { this.setState({ login: txt }) }}
+                            onChangeText={(txt) => { this.setState({ password2: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                             secureTextEntry
@@ -87,7 +114,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-around",
         alignItems: "center",
     },
-    title : {
+    title: {
         fontSize: 30,
     },
     bottomMenu: {
@@ -96,12 +123,12 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderColor: '#ccc',
         shadowColor: "black",
-        shadowOffset: {width: 0, height: -2},
+        shadowOffset: { width: 0, height: -2 },
         shadowOpacity: 0.1,
         shadowRadius: 1,
         backgroundColor: "white",
     },
-    form : {
+    form: {
         width: "100%",
         paddingHorizontal: 10,
     },
