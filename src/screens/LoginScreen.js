@@ -5,6 +5,8 @@ import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
 import api from "../Api";
+import strings from "../Language";
+
 
 export default class LoginScreen extends Component {
     constructor(props) {
@@ -37,7 +39,7 @@ export default class LoginScreen extends Component {
                     <Text style={styles.title}>Prototype login</Text>
                     <View style={styles.form}>
                         <TextInput
-                            placeholder="Email Address"
+                            placeholder={strings.email}
                             autoCapitalize="none"
                             keyboardType="email-address"
                             onChangeText={(txt) => { this.setState({ login: txt }) }}
@@ -45,7 +47,7 @@ export default class LoginScreen extends Component {
                             underlineColorAndroid="transparent"
                         />
                         <TextInput
-                            placeholder="Password"
+                            placeholder={strings.password}
                             onChangeText={(txt) => { this.setState({ password: txt }) }}
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
@@ -54,12 +56,12 @@ export default class LoginScreen extends Component {
                         <View style={styles.loginButton}>
                             <Button
                                 onPress={this.login}
-                                title={this.state.loading ? "Logging you in..." : "Log in"}
+                                title={this.state.loading ? strings.loggingYouIn : strings.login}
                             />
                         </View>
                         <View style={styles.fbSeparator}>
                             <View style={styles.fbSeparatorLine} />
-                            <Text style={styles.fbSeparatorOR}>or</Text>
+                            <Text style={styles.fbSeparatorOR}>{strings.or}</Text>
                             <View style={styles.fbSeparatorLine} />
                         </View>
                     </View>
@@ -67,8 +69,8 @@ export default class LoginScreen extends Component {
                 <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.gotoSignup}
-                        question="Don't have an account ?"
-                        answer="Sign up."
+                        question={strings.dontHaveAnAccount}
+                        answer={strings.signUp}
                     />
                 </SafeAreaView>
             </View>

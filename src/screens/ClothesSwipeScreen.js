@@ -6,6 +6,8 @@ import ClothCardComponent from "../components/ClothCardComponent";
 import SwipeUpComponent from "../components/SwipeUpComponent";
 import TopMenuComponent from "../components/TopMenuComponent";
 import api from "../Api";
+import strings from "../Language";
+
 
 export default class ClothesSwipeScreen extends Component {
     constructor(props) {
@@ -94,7 +96,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent text="Prototype" />
+                        <TopMenuComponent text={strings.titleSwipe} />
                     </SafeAreaView>
                     <SafeAreaView style={styles.finished}>
                         <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
@@ -112,7 +114,7 @@ export default class ClothesSwipeScreen extends Component {
                 <View style={styles.fullPage}>
                     <CustomStatusBar color="white"/>
                     <SafeAreaView style={styles.top}>
-                        <TopMenuComponent text="Prototype" />
+                        <TopMenuComponent text={strings.titleSwipe} />
                     </SafeAreaView>
                     <SafeAreaView style={styles.loading}>
                         <ActivityIndicator size="large" color="#000" />
@@ -125,7 +127,7 @@ export default class ClothesSwipeScreen extends Component {
             <View style={styles.fullPage}>
                 <CustomStatusBar color="white" />
                 <SafeAreaView style={styles.top}>
-                    <TopMenuComponent text="Prototype" />
+                    <TopMenuComponent text={strings.titleSwipe} />
                 </SafeAreaView>
                 {this.renderSwipeUpComponents()}
             </View>
